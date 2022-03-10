@@ -29,6 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 This project is to show the information about some others and their work done during their life time.
 It has couple of components.
+
     1. search-author: In this components there will be auto fill component to search authors, and also it will display overview of selected Author.
 
     2. author-info: In this components there are 2 tabs, One is "Bio" and other is "Work" 
@@ -36,6 +37,8 @@ It has couple of components.
         b. Work: It will list the work done by authors. There are 2 views for it. Grid View and List view.
 
 It have couple of servies.
+
     1. Author service: It will fetch data from Server
+
     2. Communication Servie: To flow data between components.
 
