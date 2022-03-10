@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="form-group col">
+    <label class="pe-2">Select Author: </label>
+    <p-autoComplete [suggestions]="results" [minLength]=3 (onSelect)="onSelect($event)"
+      (completeMethod)="search($event)" [placeholder]="'Search for Author'" field="name"></p-autoComplete>
+  </div>
+</div>
+
+<div class="card mt-3" *ngIf="selectedAuthor">
+  <div class="card-header">
+    Overview
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label>Key: </label> &nbsp;
+      </div>
+      <div class="col-md-9">
+        <span>{{selectedAuthor?.key}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label>Type: </label>&nbsp;
+      </div>
+      <div class="form-group col-md-9">
+        <span>{{selectedAuthor?.type}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label>Name: </label>
+      </div>
+      <div class="form-group col-md-9">
+        <span>{{selectedAuthor?.name}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label>Top Work: </label>
+      </div>
+      <div class="form-group col-md-9">
+        <span>{{selectedAuthor?.top_work}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label>Top Subjects: </label>&nbsp;
+      </div>
+      <div class="form-group col-md-9">
+        <span>{{selectedAuthor?.top_subjects}}</span>
+      </div>
+    </div>
+  </div>
+</div>

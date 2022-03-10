@@ -1,0 +1,91 @@
+<div class="mt-3" *ngIf="selectedAuthorKey">
+    <p-tabView>
+      <p-tabPanel header="Bio">
+        <div *ngIf="authorDetails?.bio; else noBio">
+          {{authorDetails?.bio?.value}}
+          <br />
+          Wikipedia: <a target="_blank" href="{{authorDetails?.wikipedia}}">{{authorDetails?.wikipedia}} </a>
+        </div>
+        <ng-template #noBio>
+          <span>Biodata is not available for the Author.</span>
+        </ng-template>
+      </p-tabPanel>
+      <p-tabPanel header="Works">
+
+        <p-toggleButton [(ngModel)]="isGridView" onLabel="List View" offLabel="Grid View"></p-toggleButton>
+
+        <div class="pt-2" *ngIf="isGridView; else listView">
+          <p-table dataKey="title" [value]="authorEntries" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="width: 3rem"></th>
+                <th>Title</th>
+                <th>Subtitle</th>
+                <th>Created On</th>
+                <th>Last Modified</th>
+                <th>Revision</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-entries let-expanded="expanded">
+              <tr>
+                <td>
+                  <button type="button" pButton pRipple [pRowToggler]="entries"
+                    class="p-button-text p-button-rounded p-button-plain"
+                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                </td>
+                <td>{{entries.title}}</td>
+                <td>{{entries.name}}</td>
+                <td>{{entries?.created.value | date:'mediumDate'}}</td>
+                <td>{{entries?.last_modified.value | date:'mediumDate'}}</td>
+                <td>{{entries.revision}}</td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="rowexpansion" let-entries>
+              <tr>
+                <td colspan="6">
+                  <span *ngIf="entries.description; else noDescription">
+                    {{entries.description.value || entries.description}}
+                  </span>
+                  <ng-template #noDescription>
+                    This is no description
+                  </ng-template>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <ng-template #listView>
+          <div class="pt-2" *ngFor="let entry of authorEntries">
+            <div class="card p-2">
+              <div class="row pt-2">
+                <div class="form-group col-md-12">
+                  <label>Title : </label>&nbsp;
+                  <span>{{entry.title}}</span>
+                </div>
+              </div>
+              <div class="row pt-2">
+                <div class="form-group col-md-12">
+                  <label>Created On : </label>&nbsp;
+                  <span>{{entry?.created.value | date:'mediumDate'}}</span>
+                </div>
+              </div>
+              <div class="row pt-2">
+                <div class="form-group col-md-12">
+                  <label>Last Modified : </label>&nbsp;
+                  <span>{{entry?.last_modified.value | date:'mediumDate'}}</span>
+                </div>
+              </div>
+              <div class="row pt-2">
+                <div class="form-group col-md-12">
+                  <label>Revision : </label>&nbsp;
+                  <span>{{entry.revision}}</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </ng-template>
+
+      </p-tabPanel>
+    </p-tabView>
+  </div>
